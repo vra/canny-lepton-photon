@@ -2,8 +2,6 @@ from io import BytesIO
 import requests
 from urllib.request import urlopen
 
-import cv2
-import numpy as np
 from leptonai.photon import Photon, PNGResponse
 
 
@@ -21,6 +19,8 @@ class Canny(Photon):
     @Photon.handler("run")
     def run(self, url: str) -> PNGResponse:
         # 读取图像数据
+        import cv2
+        import numpy as np
         image = np.asarray(Image.open(io.BytesIO(urlopen(url).read())))
 
         # 进行边缘检测
