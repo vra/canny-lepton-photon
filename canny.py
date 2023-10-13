@@ -11,6 +11,12 @@ from leptonai.photon import Photon, PNGResponse
 class Canny(Photon):
     """Canny 边缘检测算子"""
 
+    # 这里的依赖 Package 会在创建 Photon 时自动安装
+    requirement_dependency = [
+        "opencv-python",
+        "numpy",
+    ]
+
     # 用这个装饰器表示这个一个对外接口
     @Photon.handler("run")
     def run(self, url: str) -> PNGResponse:
