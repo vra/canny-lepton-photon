@@ -1,3 +1,4 @@
+import io
 from io import BytesIO
 import requests
 from urllib.request import urlopen
