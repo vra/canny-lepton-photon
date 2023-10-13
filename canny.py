@@ -24,14 +24,15 @@ class Canny(Photon):
         import cv2
         import numpy as np
         from PIL import Image
+
         image = np.asarray(Image.open(io.BytesIO(urlopen(url).read())))
 
         # 进行边缘检测
         edges = cv2.Canny(image, 100, 200)
 
-        # 将结果转换为输出字节形式
-        is_success, im_buf_arr = cv2.imencode(".png", edges)
-        byte_im = im_buf_arr.tobytes()
+        edges = Image.fromarray(edges)
 
-        # 返回图像格式的网络Response
-        return PNGResponse(byte_im)
+        img_io = BytesIO()
+        edges.save(img_io, format="PNG", quality="keep")
+        img_io.seek(0)
+        return PNGResponse(img_io)
