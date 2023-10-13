@@ -13,6 +13,7 @@ class Canny(Photon):
     requirement_dependency = [
         "opencv-python",
         "numpy",
+        "Pillow",
     ]
 
     # 用这个装饰器表示这个一个对外接口
@@ -21,6 +22,7 @@ class Canny(Photon):
         # 读取图像数据
         import cv2
         import numpy as np
+        from PIL import Image
         image = np.asarray(Image.open(io.BytesIO(urlopen(url).read())))
 
         # 进行边缘检测
